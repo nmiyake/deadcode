@@ -1,7 +1,6 @@
 package main
 
 import (
-	"go/types"
 	"testing"
 )
 
@@ -37,19 +36,19 @@ func TestWithTestFiles(t *testing.T) {
 	compare(t, objs, []string{"y"})
 }
 
-func compare(t *testing.T, objs []types.Object, names []string) {
+func compare(t *testing.T, objs []objectWithFset, names []string) {
 	left := make(map[string]bool)
 	right := make(map[string]bool)
 	for _, o := range objs {
-		left[o.Name()] = true
+		left[o.obj.Name()] = true
 	}
 	for _, n := range names {
 		right[n] = true
 	}
 
 	for _, o := range objs {
-		if !right[o.Name()] {
-			t.Errorf("%s should not have been reported as unused", o.Name())
+		if !right[o.obj.Name()] {
+			t.Errorf("%s should not have been reported as unused", o.obj.Name())
 		}
 	}
 	for _, n := range names {
