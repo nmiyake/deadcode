@@ -7,5 +7,8 @@ matrix:
     - go: "1.10"
     - go: "tip"
 
+env:
+  - GO111MODULE=on
+
 script:
   - go test -race ./...
